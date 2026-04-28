@@ -1,0 +1,12 @@
+.pytest_cache/
+myenv/
+venv/
+__pycache__/
+*.py[cod]
+pyvenv.cfg
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+freelance_model.joblib

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Freelance Price Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>💰 Freelance Price Predictor</h1>
+    <p style="margin-bottom: 20px; color: #94a3b8;">
+        Get smart pricing recommendations using AI
+    </p>
+
+    <form action="/predict" method="post">
+
+        <select name="skill" id="skillSelect" required onchange="updateProjects()">
+            <option value="" disabled selected>Select Skill</option>
+            <option value="python">Python</option>
+            <option value="web_dev">Web Development</option>
+            <option value="data_science">Data Science</option>
+            <option value="app_dev">App Development</option>
+            <option value="cyber_security">Cyber Security</option>
+            <option value="cloud_computing">Cloud Computing</option>
+            <option value="blockchain">Blockchain</option>
+            <option value="graphic_design">Graphic Design</option>
+            <option value="ui_ux_design">UI / UX Design</option>
+            <option value="content_writing">Content Writing</option>
+            <option value="digital_marketing">Digital Marketing</option>
+        </select>
+
+        <select name="experience" required>
+            <option value="" disabled selected>Experience Level</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="expert">Expert</option>
+        </select>
+
+        <select name="project_type" id="projectSelect" required>
+            <option value="" disabled selected>Select Skill First</option>
+        </select>
+
+        <select name="complexity" required>
+            <option value="" disabled selected>Complexity</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+
+        <input type="number" name="hours" placeholder="Estimated Hours (e.g. 20)" min="1" required>
+
+        <button type="submit">Predict Price</button>
+    </form>
+
+    {% if price %}
+        <div class="result-box">
+            <h2>💵 Recommended Price: ${{ price }}</h2>
+            <p style="font-size: 0.8rem; color: #22c55e;">Based on 2026 Market Rates</p>
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="error-box">
+            <p>⚠️ {{ error }}</p>
+        </div>
+    {% endif %}
+</div>
+
+<script>
+const SKILL_PROJECTS = {
+    python:            ["script", "automation", "ai_model", "api_endpoint", "web_scraper", "saas_mvp"],
+    web_dev:           ["landing_page", "full_website", "ecommerce", "api_endpoint", "saas_mvp", "web_scraper"],
+    data_science:      ["ai_model", "script", "automation", "api_endpoint", "technical_whitepaper", "saas_mvp"],
+    app_dev:           ["saas_mvp", "ecommerce", "api_endpoint", "full_website", "landing_page", "automation"],
+    cyber_security:    ["script", "api_endpoint", "technical_whitepaper", "saas_mvp", "automation", "web_scraper"],
+    cloud_computing:   ["automation", "api_endpoint", "saas_mvp", "script", "technical_whitepaper", "full_website"],
+    blockchain:        ["smart_contract", "saas_mvp", "api_endpoint", "technical_whitepaper", "automation", "web_scraper"],
+    graphic_design:    ["landing_page", "full_website", "ecommerce", "technical_whitepaper", "saas_mvp", "growth_hacking"],
+    ui_ux_design:      ["landing_page", "full_website", "ecommerce", "saas_mvp", "web_scraper", "automation"],
+    content_writing:   ["technical_whitepaper", "landing_page", "growth_hacking", "full_website", "ecommerce", "script"],
+    digital_marketing: ["growth_hacking", "landing_page", "ecommerce", "full_website", "technical_whitepaper", "saas_mvp"],
+};
+
+const LABELS = {
+    script:               "Script",
+    automation:           "Automation",
+    ai_model:             "AI Model",
+    landing_page:         "Landing Page",
+    full_website:         "Full Website",
+    ecommerce:            "E-Commerce Store",
+    api_endpoint:         "API / Backend",
+    web_scraper:          "Web Scraper",
+    saas_mvp:             "SaaS MVP",
+    smart_contract:       "Smart Contract",
+    technical_whitepaper: "Technical Whitepaper",
+    growth_hacking:       "Growth Hacking Campaign",
+};
+
+function updateProjects() {
+    const skill = document.getElementById("skillSelect").value;
+    const sel   = document.getElementById("projectSelect");
+    sel.innerHTML = "";
+
+    const placeholder = document.createElement("option");
+    placeholder.value    = "";
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    placeholder.textContent = "Select Project Type";
+    sel.appendChild(placeholder);
+
+    (SKILL_PROJECTS[skill] || []).forEach(pt => {
+        const opt = document.createElement("option");
+        opt.value       = pt;
+        opt.textContent = LABELS[pt] || pt;
+        sel.appendChild(opt);
+    });
+}
+</script>
+
+</body>
+</html>
