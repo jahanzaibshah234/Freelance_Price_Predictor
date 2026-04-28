@@ -255,10 +255,6 @@ Contributions are welcome! Please follow these steps:
    - Reference any related issues
    - Ensure all tests pass
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 🐛 Bug Reports & Feature Requests
 
 Found a bug or have a feature request? Please open an issue on GitHub:
