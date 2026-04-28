@@ -1,5 +1,7 @@
 # Freelance Price Predictor 💰
 
+👥 Developed by **Jahanzaib Shah & Maria Rashid**
+
 A machine learning-powered web application that predicts freelance project pricing based on project characteristics and market factors.
 
 ## 📋 Overview
@@ -161,76 +163,52 @@ The model processes five specific features to generate a prediction:
 - Features: 5 core input features (Skill, Experience, Project Type, Complexity, and Hours)
 - Target Variable: Project Price (USD) — The total recommended project fee
 
-### Model Performance Metrics
-
-| Metric | Value |
-|--------|-------|
-| Mean Absolute Error (MAE) | $[Value] |
-| Root Mean Square Error (RMSE) | $[Value] |
-| R² Score | 0.9842 |
-| Model Accuracy | [Value]% |
-
 ## 🔄 API Endpoints
 
-If your application exposes REST APIs:
+While the primary interface is the web UI, the backend processes requests through the following structure:
 
 ### Predict Price
 
 **Endpoint:** `POST /api/predict`
+**Content-Type:** application/x-www-form-urlencoded
 
 **Request:**
 ```json
 {
-  "complexity": 7,
-  "duration": 40,
-  "skills": ["Python", "ML", "Web Dev"],
-  "deadline_days": 14,
-  "experience_level": "intermediate"
+  "skill": "python",
+  "experience": "intermediate",
+  "project_type": "automation",
+  "complexity": "medium",
+  "hours": 20
 }
 ```
 
 **Response:**
 ```json
 {
-  "predicted_price": 1350,
-  "price_range": {
-    "min": 1200,
-    "max": 1500
-  },
-  "confidence": 0.92,
-  "hourly_rate": 33.75
+  "status": "success",
+  "recommended_price": 1063.09,
+  "currency": "USD",
+  "market_year": 2026
 }
 ```
 
-## 📊 Data Sources
-
-- Freelance marketplace historical data
-- Upwork, Fiverr, and other platform statistics
-- Industry salary surveys
-- Market trend analysis reports
-
-## 🔒 Security & Privacy
-
-- User input validation on all forms
-- No sensitive data stored permanently
-- HTTPS-ready configuration
-- CSRF protection enabled
-- SQL injection prevention implemented
 
 ## 🧪 Testing
 
 Run the test suite:
 
 ```bash
-pytest tests/
+pytest test.py
 ```
 
 ### Test Coverage
 
-- Unit tests for model predictions
-- Integration tests for API endpoints
-- Frontend validation tests
-- Edge case handling
+- Logic Tests (test_prediction_logic_success): Confirms the AI model successfully processes inputs and returns a valid price
+- Validation Tests (test_invalid_skill_combination): Ensures the backend logic correctly blocks impossible skill/project pairings
+- Web Integration (test_home_page_loads): Verifies that the FastAPI server renders the homepage and form fields correctly
+- End-to-End Flow (test_web_prediction_flow): Simulates a full user interaction from form submission to price display
+- Error Handling (test_web_error_handling): Checks that the UI properly displays error messages when invalid data is submitted
 
 ## 📈 Future Enhancements
 
@@ -294,34 +272,43 @@ Include:
 
 ## 📞 Contact & Support
 
-- **Email**: [your-email@example.com]
+- **Email**: jahanzaib1234510@gmail.com
 - **GitHub**: [@jahanzaibshah234](https://github.com/jahanzaibshah234)
-- **LinkedIn**: [Your LinkedIn Profile]
-- **Website**: [Your Portfolio/Website]
+- **LinkedIn**: https://www.linkedin.com/in/jahanzaib-khalid/
 
 For quick questions, feel free to open a discussion or contact via email.
 
-## 👤 Author
+## 👥 Team
 
-**Jahanzaib Shah**
-- GitHub: [@jahanzaibshah234](https://github.com/jahanzaibshah234)
-- Location: [Your Location]
-- Interests: Machine Learning, Web Development, Data Science
+### **Jahanzaib Shah**
+- Role: Machine Learning Engineer & Backend Developer
+- Contributions:
+  - Built and trained the ML model (Random Forest Regressor)
+  - Developed FastAPI backend and API endpoints
+  - Integrated model with web application
+
+### **Maria Rashid**
+- Role: Python Developer & UI Support
+- Contributions:
+  - Assisted in Python development and project logic
+  - Worked on frontend integration (HTML/CSS templates)
+  - Supported testing and overall project structuring
 
 ## 🙏 Acknowledgments
 
 - Thanks to all contributors and supporters
 - Inspired by freelance marketplace ecosystems
-- Built with love for the freelance community
-- Special thanks to:
-  - Scikit-learn and machine learning community
-  - Flask web framework
-  - Open-source contributors
+- Built with dedication for the freelance community
+
+**Special Thanks:**
+- Maria Rashid for her valuable contribution in development and support
+- Scikit-learn and machine learning community
+- Open-source contributors
 
 ## 📚 Resources & References
 
 - [Scikit-learn Documentation](https://scikit-learn.org/)
-- [Flask Documentation](https://flask.palletsprojects.com/)
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
 - [Python Documentation](https://docs.python.org/3/)
 - [Machine Learning Best Practices](https://ml.mastery.com/)
 
@@ -342,7 +329,7 @@ For quick questions, feel free to open a discussion or contact via email.
 
 <div align="center">
 
-**Made with ❤️ by Jahanzaib Shah**
+**Made with ❤️ by Jahanzaib Shah & Maria Rashid**
 
 ⭐ If this project helped you, please consider giving it a star!
 
